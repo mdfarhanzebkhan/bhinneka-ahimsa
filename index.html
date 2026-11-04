@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bhinneka Ahimsa | Platform Pembelajaran Bahasa Humanis-Digital</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN for utility classes -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            saffron: '#C85226',
+            tealNusantara: '#0D5C75',
+            goldWisdom: '#D4AF37',
+            emeraldAmong: '#10B981',
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="batik-pattern-bg">
+
+  <!-- ================= TOP HEADER / NAVBAR ================= -->
+  <header class="header-glass">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Brand / Logo -->
+        <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('beranda')">
+          <div class="emblem-ring">
+            <div class="w-11 h-11 rounded-full bg-white flex items-center justify-center text-saffron font-bold text-lg shadow-sm border border-amber-200">
+              <!-- Dual Architecture Icon: Borobudur Curve + Lotus -->
+              <svg class="w-7 h-7 text-saffron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2L4 12h16L12 2z" fill="#FDEEE9" stroke="#C85226"/>
+                <circle cx="12" cy="7" r="1.5" fill="#D4AF37"/>
+                <path d="M7 16c2-1 4-1 5 1 1-2 3-2 5-1" stroke="#0D5C75"/>
+                <path d="M3 21c3-1 6-1 9 1 3-2 6-2 9-1" stroke="#C85226"/>
+              </svg>
+            </div>
+          </div>
+          <div>
+            <span class="text-xl font-bold font-serif tracking-tight text-slate-900 dark:text-white block leading-tight">
+              Bhinneka Ahimsa
+            </span>
+            <span class="text-xs font-semibold tracking-wider uppercase text-saffron block">
+              Sinergi Gandhi &bull; Ki Hadjar Dewantara
+            </span>
+          </div>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden lg:flex items-center space-x-1" id="desktopNav">
+          <a class="nav-link active" data-tab="beranda" onclick="switchTab('beranda')">Beranda</a>
+          <a class="nav-link" data-tab="tri-n" onclick="switchTab('tri-n')">Ruang Kelas Tri-N</a>
+          <a class="nav-link" data-tab="simulasi" onclick="switchTab('simulasi')">Simulasi Budaya</a>
+          <a class="nav-link" data-tab="budaya" onclick="switchTab('budaya')">Pojok Sastra & Seni</a>
+          <a class="nav-link" data-tab="riset" onclick="switchTab('riset')">Hub Riset R&amp;D</a>
+          <a class="nav-link" data-tab="tentang" onclick="switchTab('tentang')">Profil &amp; Visi</a>
+        </nav>
+
+        <!-- Action Tools: Ambient Audio, Dark Mode, Mobile Menu -->
+        <div class="flex items-center gap-3">
+          <!-- Ambient Sound Toggle -->
+          <button id="soundToggleBtn" onclick="toggleAmbientSound()" class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-colors flex items-center gap-1.5 text-xs font-semibold" title="Putar Alunan Meditatif Gamelan & Sitar">
+            <svg id="soundIconOff" class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+            </svg>
+            <svg id="soundIconOn" class="w-4 h-4 text-emeraldAmong hidden animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+            </svg>
+            <span class="hidden sm:inline">Harmoni Suara</span>
+          </button>
+
+          <!-- Dark Mode Toggle -->
+          <button onclick="toggleTheme()" class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-colors" title="Ubah Tema Gelap/Terang">
+            <svg class="w-4 h-4 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+            <svg class="w-4 h-4 hidden dark:block text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </button>
+
+          <!-- Mobile Menu Button -->
+          <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Dropdown -->
+    <div id="mobileMenu" class="hidden lg:hidden border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 pt-3 pb-5 space-y-2">
+      <a class="nav-link block active" data-tab="beranda" onclick="switchTab('beranda'); toggleMobileMenu()">Beranda</a>
+      <a class="nav-link block" data-tab="tri-n" onclick="switchTab('tri-n'); toggleMobileMenu()">Ruang Kelas Tri-N</a>
+      <a class="nav-link block" data-tab="simulasi" onclick="switchTab('simulasi'); toggleMobileMenu()">Simulasi Budaya</a>
+      <a class="nav-link block" data-tab="budaya" onclick="switchTab('budaya'); toggleMobileMenu()">Pojok Sastra & Seni</a>
+      <a class="nav-link block" data-tab="riset" onclick="switchTab('riset'); toggleMobileMenu()">Hub Riset R&amp;D</a>
+      <a class="nav-link block" data-tab="tentang" onclick="switchTab('tentang'); toggleMobileMenu()">Profil &amp; Visi</a>
+    </div>
+  </header>
+
+  <!-- ================= MAIN CONTAINER ================= -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+    <!-- ======================================================= -->
+    <!-- SECTION 1: BERANDA - JEMBATAN HUMANISME                -->
+    <!-- ======================================================= -->
+    <div id="tab-beranda" class="tab-content active space-y-16">
+      
+      <!-- Hero Section -->
+      <section class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50/40 to-cyan-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 border border-amber-200/60 dark:border-slate-700 p-8 sm:p-12 lg:p-16 shadow-xl">
+        <div class="relative z-10 max-w-3xl space-y-6">
+          <div class="hero-badge">
+            <span class="w-2 h-2 rounded-full bg-saffron animate-ping"></span>
+            Prototipe Disertasi S3 &bull; Pendidikan Bahasa Humanis-Digital
+          </div>
+          
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-slate-900 dark:text-white leading-[1.15]">
+            Membangun Jembatan Humanisme di Era Digital
+          </h1>
+          
+          <p class="text-lg sm:text-xl text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
+            Sinergi filosofi anti-kekerasan <span class="font-semibold text-saffron">Mahatma Gandhi (Ahimsa & Satyagraha)</span> dan pedagogi asah-asih-asuh <span class="font-semibold text-tealNusantara">Ki Hadjar Dewantara (Sistem Among & Tri-N)</span> sebagai antitesis dehumanisasi komunikasi di ruang siber.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-4 pt-4 hero-buttons">
+            <button onclick="switchTab('tri-n')" class="btn-primary">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+              Masuk Ruang Kelas Tri-N
+            </button>
+            <button onclick="switchTab('simulasi')" class="btn-secondary">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+              Simulasi Diplomasi Lintas Budaya
+            </button>
+            <button onclick="switchTab('riset')" class="text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-saffron p-2 transition-colors">
+              Pelajari Kerangka R&amp;D &rarr;
+            </button>
+          </div>
+        </div>
+
+        <!-- Decorative Motifs Overlay -->
+        <div class="absolute -right-16 -bottom-16 w-96 h-96 opacity-10 dark:opacity-5 pointer-events-none">
+          <svg viewBox="0 0 200 200" fill="currentColor">
+            <polygon points="100,10 120,70 190,70 135,110 155,175 100,135 45,175 65,110 10,70 80,70" />
+          </svg>
+        </div>
+      </section>
+
+      <!-- The Core Problem & Solution Matrix -->
+      <section class="space-y-8">
+        <div class="text-center max-w-3xl mx-auto space-y-3">
+          <span class="text-xs uppercase font-bold tracking-widest text-saffron">Paradigma Pembelajaran</span>
+          <h2 class="text-3xl sm:text-4xl font-serif font-bold text-slate-900 dark:text-white">
+            Mengapa Bukan Sekadar Aplikasi Bahasa Biasa?
+          </h2>
+          <p class="text-slate-600 dark:text-slate-400 text-base">
+            Platform pembelajaran mekanistik mengajarkan tata bahasa, namun kerap mengabaikan pembentukan karakter, empati antarmanusia, dan kearifan kultural.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Problem Card -->
+          <div class="humanist-card border-red-200 dark:border-red-900/40 bg-red-50/20 dark:bg-red-950/10">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/50 flex items-center justify-center text-red-600">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+              </span>
+              <h3 class="text-xl font-bold font-serif text-slate-900 dark:text-white">Krisis Dehumanisasi Komunikasi Digital</h3>
+            </div>
+            <ul class="space-y-3 text-slate-700 dark:text-slate-300 text-sm">
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 font-bold">&times;</span>
+                <span><strong>Kekerasan Verbal & Cyberbullying:</strong> Ruang digital sering menjadi arena agresi tanpa filter empati.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 font-bold">&times;</span>
+                <span><strong>Pembelajaran Bahasa Reduksionis:</strong> Pembelajaran bahasa asing direduksi menjadi hafalan rumus sintaksis mekanis dan terjemahan instan AI.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 font-bold">&times;</span>
+                <span><strong>Alienasi Makna Budaya:</strong> Bahasa dipelajari tanpa memahami denyut kemanusiaan dan martabat penutur aslinya.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Solution Card -->
+          <div class="humanist-card border-emerald-200 dark:border-emerald-900/40 bg-emerald-50/20 dark:bg-emerald-950/10">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center text-emerald-600">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </span>
+              <h3 class="text-xl font-bold font-serif text-slate-900 dark:text-white">Solusi Model Humanis-Digital</h3>
+            </div>
+            <ul class="space-y-3 text-slate-700 dark:text-slate-300 text-sm">
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-500 font-bold">&check;</span>
+                <span><strong>Digital Ahimsa (Anti-Kekerasan Digital):</strong> Melatih pembelajar merespons dinamika siber secara santun, transformatif, dan menyejukkan.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-500 font-bold">&check;</span>
+                <span><strong>Sistem Tri-N (Ngerti, Ngroso, Ngelakoni):</strong> Mengintegrasikan kognisi berbobot nilai, kepekaan rasa hati, dan aksi nyata.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-500 font-bold">&check;</span>
+                <span><strong>Diplomasi Kultural Bilateral:</strong> Menjembatani dua peradaban besar maritim & peradaban dunia (Indonesia dan India).</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Infografis Interaktif: Konvergensi Filosofi Gandhi & Dewantara -->
+      <section class="space-y-8">
+        <div class="text-center max-w-3xl mx-auto space-y-3">
+          <span class="text-xs uppercase font-bold tracking-widest text-tealNusantara">Infografis Interaktif</span>
+          <h2 class="text-3xl sm:text-4xl font-serif font-bold text-slate-900 dark:text-white">
+            Konvergensi Gagasan: India & Nusantara
+          </h2>
+          <p class="text-slate-600 dark:text-slate-400 text-base">
+            Klik masing-masing pilar untuk mengeksplorasi sinergi filosofis yang menjadi pondasi pedagogis platform ini.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Pillar 1: Gandhi -->
+          <div class="humanist-card cursor-pointer hover:border-saffron" onclick="showPhilosophyDetail('gandhi')">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-bold uppercase tracking-wider text-saffron bg-orange-100 dark:bg-orange-950/60 px-3 py-1 rounded-full">
+                Tradisi India
+              </span>
+              <span class="text-2xl font-serif text-slate-400">01</span>
+            </div>
+            <h3 class="text-2xl font-bold font-serif mb-2 text-slate-900 dark:text-white">Mahatma Gandhi</h3>
+            <p class="text-sm font-semibold text-saffron mb-3">Ahimsa &bull; Satyagraha &bull; Sarvodaya</p>
+            <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">
+              Filosofi anti-kekerasan murni. Bukan sekadar menolak kekerasan fisik, melainkan menyucikan kata, niat, dan relasi antarinsan.
+            </p>
+            <div class="text-xs font-bold text-saffron flex items-center gap-1">
+              <span>Klik untuk melihat manifestasi digital</span> &rarr;
+            </div>
+          </div>
+
+          <!-- Pillar 2: Synthesis (Center) -->
+          <div class="humanist-card border-amber-300 dark:border-amber-700 bg-gradient-to-b from-amber-50/50 to-white dark:from-slate-800 dark:to-slate-900 cursor-pointer shadow-md" onclick="showPhilosophyDetail('sintesis')">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-100 dark:bg-amber-950/60 px-3 py-1 rounded-full">
+                Sintesis Disertasi
+              </span>
+              <span class="text-2xl font-serif text-amber-500">&infin;</span>
+            </div>
+            <h3 class="text-2xl font-bold font-serif mb-2 text-slate-900 dark:text-white">Model Humanis-Digital</h3>
+            <p class="text-sm font-semibold text-amber-600 dark:text-amber-400 mb-3">Teknologi Berjiwa Kemanusiaan</p>
+            <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">
+              Mengintegrasikan daya jangkau algoritma digital dengan kehangatan rasa asah-asih-asuh serta kesantunan dialog tanpa kekerasan.
+            </p>
+            <div class="text-xs font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1">
+              <span>Klik untuk melihat sintesis konseptual</span> &rarr;
+            </div>
+          </div>
+
+          <!-- Pillar 3: Dewantara -->
+          <div class="humanist-card cursor-pointer hover:border-tealNusantara" onclick="showPhilosophyDetail('dewantara')">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-bold uppercase tracking-wider text-tealNusantara bg-cyan-100 dark:bg-cyan-950/60 px-3 py-1 rounded-full">
+                Tradisi Nusantara
+              </span>
+              <span class="text-2xl font-serif text-slate-400">02</span>
+            </div>
+            <h3 class="text-2xl font-bold font-serif mb-2 text-slate-900 dark:text-white">Ki Hadjar Dewantara</h3>
+            <p class="text-sm font-semibold text-tealNusantara mb-3">Sistem Among &bull; Tri-N &bull; Tri Hayu</p>
+            <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">
+              Pendidikan yang memerdekakan lahir dan batin melalui asuhan penuh kasih sayang: <em>Ing Ngarso Sung Tulodo, Ing Madyo Mangun Karso, Tut Wuri Handayani</em>.
+            </p>
+            <div class="text-xs font-bold text-tealNusantara flex items-center gap-1">
+              <span>Klik untuk melihat manifestasi pedagogis</span> &rarr;
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Dynamic Infographic Details Modal / Box -->
+        <div id="philosophyDetailBox" class="p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-lg transition-all duration-300">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <span id="detailBadge" class="w-3 h-3 rounded-full bg-saffron"></span>
+              <h4 id="detailTitle" class="text-xl font-serif font-bold text-slate-900 dark:text-white">
+                Sinergi Ahimsa Gandhi dalam Komunikasi Digital
+              </h4>
+            </div>
+            <span class="text-xs text-slate-400">Interaktif</span>
+          </div>
+          <div id="detailContent" class="mt-4 text-sm text-slate-700 dark:text-slate-300 space-y-3 leading-relaxed">
+            <p>
+              Dalam pemikiran Mahatma Gandhi, <strong>Ahimsa</strong> adalah puncak kekuatan jiwa (*soul force*). Diterapkan dalam konteks komunikasi siber, Ahimsa melarang pembelajar membalas cemoohan dengan provokasi, melainkan menanggapi dengan ketenangan, argumen logis yang santun, dan empati tanpa batas.
+            </p>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+
+    <!-- ======================================================= -->
+    <!-- SECTION 2: RUANG KELAS TRI-N (MODUL PEMBELAJARAN)      -->
+    <!-- ======================================================= -->
+    <div id="tab-tri-n" class="tab-content space-y-12">
+      
+      <!-- Module Header -->
+      <div class="space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-100 dark:bg-teal-950 text-teal-800 dark:text-teal-200 text-xs font-bold">
+          Pondasi Ki Hadjar Dewantara
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-slate-900 dark:text-white">
+          Ruang Kelas Tri-N: Dari Kognisi Menuju Aksi Nyata
+        </h2>
+        <p class="text-slate-600 dark:text-slate-400 max-w-3xl">
+          Pembelajaran bahasa bukan deretan soal pilihan ganda hafalan, melainkan proses holistik: 
+          <strong>Ngerti (Kognitif Berbobot Nilai)</strong>, <strong>Ngroso (Afektif & Digital Ahimsa)</strong>, dan <strong>Ngelakoni (Psikomotorik & Kolaborasi Lintas Budaya)</strong>.
+        </p>
+
+        <!-- Sub Tab Buttons -->
+        <div class="flex flex-wrap gap-3 pt-4">
+          <button id="btnTriNgerti" onclick="switchTriSubTab('ngerti')" class="tri-btn active">
+            <span class="w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 flex items-center justify-center text-xs font-bold">1</span>
+            Tahap 'Ngerti' (Kognitif Humanis)
+          </button>
+          <button id="btnTriNgroso" onclick="switchTriSubTab('ngroso')" class="tri-btn">
+            <span class="w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 flex items-center justify-center text-xs font-bold">2</span>
+            Tahap 'Ngroso' (Latihan Digital Ahimsa)
+          </button>
+          <button id="btnTriNgelakoni" onclick="switchTriSubTab('ngelakoni')" class="tri-btn">
+            <span class="w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 flex items-center justify-center text-xs font-bold">3</span>
+            Tahap 'Ngelakoni' (Ruang Kolaborasi)
+          </button>
+        </div>
+      </div>
+
+      <!-- ================= TAHAP 1: NGERTI ================= -->
+      <div id="subtab-ngerti" class="space-y-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          <!-- Bacaan Sastra & Nilai (2 Cols) -->
+          <div class="lg:col-span-2 humanist-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+              <span class="text-xs font-bold text-saffron uppercase tracking-wider">Teks Bacaan &amp; Analisis Kritis</span>
+              <span class="text-xs text-slate-500">Estimasi baca: 3 Menit</span>
+            </div>
+            
+            <h3 class="text-2xl font-serif font-bold text-slate-900 dark:text-white">
+              Ketika Tagore Melangkah di Bumi Taman Siswa (1927)
+            </h3>
+            
+            <div class="prose dark:prose-invert text-slate-700 dark:text-slate-300 text-sm leading-relaxed space-y-3">
+              <p>
+                Pada bulan September 1927, pujangga peraih Nobel Sastra asal India, <strong>Rabindranath Tagore</strong>, berkunjung ke Yogyakarta dan disambut hangat oleh <strong>Ki Hadjar Dewantara</strong> di Perguruan Taman Siswa. Pertemuan ini bukan sekadar silaturahmi formal kenegaraan, melainkan resonansi batin antara dua tokoh besar yang sama-sama menolak pendidikan kolonial yang mekanistik dan membelenggu jiwa.
+              </p>
+              <p>
+                Tagore membawa semangat <em>Shantiniketan</em>—sekolah alam di bawah rindangnya pepohonan di mana anak-anak belajar menyatu dengan seni dan alam semesta. Ki Hadjar menyambutnya dengan filosofi <em>Sistem Among</em>: mendidik anak sesuai kodrat alam dan zamannya dengan prinsip <em>momong, among, dan ngemong</em>.
+              </p>
+              <blockquote class="border-l-4 border-goldWisdom pl-4 italic text-slate-800 dark:text-slate-200 py-1 bg-amber-50/50 dark:bg-slate-800/60 rounded-r">
+                "Bahasa adalah sayap jiwa sebuah bangsa. Ketika dua bangsa saling mempelajari bahasanya dengan ketulusan hati, mereka sesungguhnya sedang membuka pintu menuju persaudaraan universal (*Vasudhaiva Kutumbakam*)."
+              </blockquote>
+              <p>
+                Melalui teks ini, pembelajar diajak memahami bahwa Bahasa Indonesia yang dipelajari bukan sekadar alat transaksi ekonomi, melainkan medium diplomasi kultural yang memuat memori historis persahabatan bangsa.
+              </p>
+            </div>
+
+            <!-- Interaktif Glosarium Kosakata Humanis -->
+            <div class="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-2">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Kosakata Bernilai Kemanusiaan:</span>
+              <div class="flex flex-wrap gap-2">
+                <button onclick="playVocabWord('tepasira')" class="px-3 py-1.5 rounded-lg bg-orange-50 dark:bg-orange-950/60 border border-orange-200 dark:border-orange-800 text-xs font-semibold text-saffron hover:bg-orange-100 flex items-center gap-1.5">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
+                  Tepasira (Tenggang Rasa)
+                </button>
+                <button onclick="playVocabWord('ahimsa')" class="px-3 py-1.5 rounded-lg bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-xs font-semibold text-tealNusantara hover:bg-teal-100 flex items-center gap-1.5">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
+                  Ahimsa (Nirkekerasan)
+                </button>
+                <button onclick="playVocabWord('among')" class="px-3 py-1.5 rounded-lg bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 text-xs font-semibold text-amber-700 hover:bg-amber-100 flex items-center gap-1.5">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
+                  Sistem Among (Asah, Asih, Asuh)
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kuis Kognitif Interaktif (1 Col) -->
+          <div class="humanist-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+              <span class="text-xs font-bold text-tealNusantara uppercase tracking-wider">Uji Pemahaman Kognitif</span>
+              <span id="quizScoreBadge" class="text-xs font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-700">Skor: 0/100</span>
+            </div>
+
+            <div id="quizContainer" class="space-y-4">
+              <p class="text-sm font-semibold text-slate-800 dark:text-slate-200">
+                1. Nilai utama apakah yang mempersatukan pemikiran Rabindranath Tagore dan Ki Hadjar Dewantara dalam teks tersebut?
+              </p>
+              
+              <div class="space-y-2">
+                <div class="quiz-opt" onclick="selectQuizAnswer(this, false, 'Kurang tepat. Keduanya justru menolak penyeragaman dan hegemoni kurikulum kolonial.')">
+                  <span class="font-bold text-xs mt-0.5 text-slate-400">A</span>
+                  <span class="text-xs">Keinginan untuk mengadopsi standarisasi sistem pendidikan Eropa sepenuhnya.</span>
+                </div>
+                <div class="quiz-opt" onclick="selectQuizAnswer(this, true, 'Tepat sekali! Keduanya memandang pendidikan sebagai pembebasan jiwa melalui kodrat alam dan kebudayaan luhur.')">
+                  <span class="font-bold text-xs mt-0.5 text-slate-400">B</span>
+                  <span class="text-xs">Penghargaan pada kodrat alam, kemerdekaan jiwa, dan humanisme yang berakar pada kearifan lokal.</span>
+                </div>
+                <div class="quiz-opt" onclick="selectQuizAnswer(this, false, 'Kurang tepat. Diplomasi perdagangan bukan fokus utama pertemuan historis tersebut.')">
+                  <span class="font-bold text-xs mt-0.5 text-slate-400">C</span>
+                  <span class="text-xs">Kesepakatan bilateral perdagangan tekstil dan rempah-rempah masa kolonial.</span>
+                </div>
+              </div>
+
+              <div id="quizFeedback" class="hidden p-3 rounded-xl text-xs font-medium leading-relaxed"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ================= TAHAP 2: NGROSO (DIGITAL AHIMSA) ================= -->
+      <div id="subtab-ngroso" class="hidden space-y-8">
+        <div class="humanist-card space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
+            <div>
+              <span class="text-xs font-bold text-saffron uppercase tracking-wider">Latihan Afektif: Digital Ahimsa</span>
+              <h3 class="text-2xl font-serif font-bold text-slate-900 dark:text-white mt-1">
+                Mengubah Api Kebencian Menjadi Dialog Menyejukkan
+              </h3>
+            </div>
+            
+            <!-- Empathy Meter Display -->
+            <div class="w-full sm:w-64 space-y-1">
+              <div class="flex justify-between text-xs font-semibold">
+                <span class="text-slate-500">Tingkat Empathy & Ahimsa:</span>
+                <span id="empathyScoreLabel" class="text-emeraldAmong">65% (Tenggang Rasa)</span>
+              </div>
+              <div class="empathy-meter">
+                <div id="empathyFillBar" class="empathy-fill" style="width: 65%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Studi Kasus Simulasi Komentar Medsos -->
+          <div class="space-y-4">
+            <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 flex items-start gap-4">
+              <div class="w-10 h-10 rounded-full bg-slate-300 dark:bg-slate-600 flex items-center justify-center font-bold text-slate-700 dark:text-slate-200 flex-shrink-0">
+                @
+              </div>
+              <div class="space-y-1 flex-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-bold text-slate-900 dark:text-white">Netizen_Anonim99</span>
+                  <span class="text-[10px] text-slate-400">di forum media sosial</span>
+                </div>
+                <p class="text-sm text-slate-800 dark:text-slate-200 italic bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-700">
+                  "Kenapa orang asing repot-repot belajar Bahasa Indonesia? Paling cuma mau memanfaatkan kita atau bicara kaku kayak robot penerjemah! Gak usah sok paham budaya Nusantara deh!"
+                </p>
+              </div>
+            </div>
+
+            <!-- Interaktif Pilihan Respons Siswa -->
+            <div class="space-y-2">
+              <label class="text-xs font-bold uppercase tracking-wider text-slate-500 block">
+                Bagaimana Anda merespons sebagai pembelajar bahasa yang berjiwa Ahimsa?
+              </label>
+
+              <!-- Option A: Reaktif -->
+              <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-red-400 cursor-pointer transition-all bg-white dark:bg-slate-900" onclick="chooseEmpathyOption('reaktif')">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-sm text-slate-800 dark:text-slate-200">Pilihan A (Reaktif & Menyerang Balik)</span>
+                  <span class="text-xs text-red-500 font-semibold">Tinggi Risiko Eskalasi</span>
+                </div>
+                <p class="text-xs text-slate-600 dark:text-slate-400 mt-1 italic">
+                  "Kalian sendiri yang berpikiran sempit! Saya belajar dengan biaya sendiri dan kerja keras, kalian tidak berhak menghakimi saya!"
+                </p>
+              </div>
+
+              <!-- Option B: Pasif / Dingin -->
+              <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-amber-400 cursor-pointer transition-all bg-white dark:bg-slate-900" onclick="chooseEmpathyOption('pasif')">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-sm text-slate-800 dark:text-slate-200">Pilihan B (Mengabaikan / Dingin)</span>
+                  <span class="text-xs text-amber-500 font-semibold">Netral Tanpa Transformasi</span>
+                </div>
+                <p class="text-xs text-slate-600 dark:text-slate-400 mt-1 italic">
+                  (Tidak membalas apa-apa dan langsung memblokir akun pengguna tersebut.)
+                </p>
+              </div>
+
+              <!-- Option C: Digital Ahimsa -->
+              <div class="p-4 rounded-xl border-2 border-emerald-300 dark:border-emerald-700 hover:border-emerald-500 cursor-pointer transition-all bg-emerald-50/20 dark:bg-emerald-950/20" onclick="chooseEmpathyOption('ahimsa')">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-sm text-emerald-800 dark:text-emerald-300">Pilihan C (Digital Ahimsa & Transformatif)</span>
+                  <span class="text-xs text-emeraldAmong font-bold">&starf; Rekomendasi Pedagogis</span>
+                </div>
+                <p class="text-xs text-slate-700 dark:text-slate-300 mt-1 italic">
+                  "Terima kasih atas masukannya, Kawan. Saya mengerti bahwa kemampuan bahasa saya masih perlu terus diasah. Namun, cinta saya pada kehangatan dan kekayaan budaya Indonesia sangat tulus. Mari kita saling belajar dan bertukar cerita agar kita bisa saling memahami."
+                </p>
+              </div>
+            </div>
+
+            <!-- Feedback Pedagogis Interaktif -->
+            <div id="empathyFeedbackBox" class="p-4 rounded-2xl bg-amber-50 dark:bg-slate-800 border border-amber-200 dark:border-slate-700 space-y-2">
+              <h4 class="text-sm font-bold font-serif text-slate-900 dark:text-white flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emeraldAmong"></span>
+                Refleksi Guru (Sistem Among):
+              </h4>
+              <p id="empathyFeedbackText" class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                Pilihlah salah satu opsi respons di atas untuk menganalisis dampak psikologis dan sosiolinguistik dari kalimat yang Anda gunakan di ruang digital.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TAHAP 3: NGELAKONI (PSIKOMOTORIK / AKSI NYATA) ================= -->
+      <div id="subtab-ngelakoni" class="hidden space-y-8">
+        <div class="humanist-card space-y-6">
+          <div class="border-b border-slate-100 dark:border-slate-800 pb-4">
+            <span class="text-xs font-bold text-tealNusantara uppercase tracking-wider">Tahap Psikomotorik & Kolaborasi</span>
+            <h3 class="text-2xl font-serif font-bold text-slate-900 dark:text-white mt-1">
+              Ruang Aksi & Menulis Kolaboratif Lintas Bangsa
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1">
+              Menerapkan prinsip <em>Ing Madyo Mangun Karso</em> (Membangun prakarsa bersama) melalui tulisan reflektif berbahasa Indonesia.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Writing Workspace -->
+            <div class="space-y-4">
+              <label class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 block">
+                Lembar Kerja Siswa: Refleksi Persahabatan Budaya
+              </label>
+              
+              <textarea id="essayInput" rows="7" class="w-full p-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-saffron" placeholder="Tuliskan 2-3 kalimat refleksi Anda dalam Bahasa Indonesia mengenai nilai persahabatan, toleransi, atau pengalaman belajar budaya antarnegara... (Contoh: Melalui bahasa, saya belajar mendengar sebelum menghakimi...)"></textarea>
+
+              <div class="flex items-center justify-between">
+                <span id="charCount" class="text-xs text-slate-400">0 karakter</span>
+                <button onclick="evaluateEssay()" class="btn-primary text-xs py-2 px-4">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                  Evaluasi Kesantunan &amp; Tri-N
+                </button>
+              </div>
+            </div>
+
+            <!-- Instant Pedagogical Feedback Result -->
+            <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-4">
+              <h4 class="text-sm font-bold font-serif text-slate-900 dark:text-white flex items-center gap-2">
+                <svg class="w-4 h-4 text-emeraldAmong" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>
+                Asesmen Autentik Tri-N
+              </h4>
+
+              <div class="space-y-3 text-xs">
+                <div>
+                  <div class="flex justify-between font-semibold mb-1">
+                    <span class="text-slate-600 dark:text-slate-400">Indeks Kesantunan Bahasa:</span>
+                    <span id="scoreKesantunan" class="text-saffron font-bold">-</span>
+                  </div>
+                  <div class="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
+                    <div id="barKesantunan" class="bg-saffron h-full transition-all duration-500" style="width: 0%"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex justify-between font-semibold mb-1">
+                    <span class="text-slate-600 dark:text-slate-400">Muatan Nilai Empati & Ahimsa:</span>
+                    <span id="scoreEmpati" class="text-emeraldAmong font-bold">-</span>
+                  </div>
+                  <div class="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
+                    <div id="barEmpati" class="bg-emeraldAmong h-full transition-all duration-500" style="width: 0%"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="essayFeedbackNote" class="p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs text-slate-600 dark:text-slate-400 leading-relaxed italic">
+                Tuliskan kalimat Anda di kolom sebelah kiri dan tekan tombol 'Evaluasi Kesantunan & Tri-N' untuk melihat analisis pedagogis secara langsung.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ======================================================= -->
+    <!-- SECTION 3: SIMULASI KOMUNIKASI LINTAS BUDAYA           -->
+    <!-- ======================================================= -->
+    <div id="tab-simulasi" class="tab-content space-y-12">
+      <div class="space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-200 text-xs font-bold">
+          Berdasarkan Rekam Jejak Penerjemah Simultan VIP
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-slate-900 dark:text-white">
+          Simulasi Diplomasi &amp; Kecerdasan Budaya (Cultural Intelligence)
+        </h2>
+        <p class="text-slate-600 dark:text-slate-400 max-w-3xl">
+          Dalam pertemuan tingkat tinggi maupun interaksi sosial sehari-hari, kesalahan memilih diksi atau mengabaikan norma tak tertulis dapat berakibat fatal. Uji kemampuan Anda bernavigasi dalam 3 skenario nyata di bawah ini.
+        </p>
+
+        <!-- Scenario Selector Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+          <button onclick="loadScenario(1)" id="scenBtn1" class="humanist-card text-left p-4 hover:border-saffron active-scenario">
+            <span class="text-[10px] font-bold text-saffron uppercase">Skenario 01</span>
+            <h4 class="font-bold text-sm text-slate-900 dark:text-white mt-1">Diplomasi Bilateral Kebudayaan</h4>
+            <p class="text-xs text-slate-500 mt-1">New Delhi - Jakarta MoU</p>
+          </button>
+          <button onclick="loadScenario(2)" id="scenBtn2" class="humanist-card text-left p-4 hover:border-tealNusantara">
+            <span class="text-[10px] font-bold text-tealNusantara uppercase">Skenario 02</span>
+            <h4 class="font-bold text-sm text-slate-900 dark:text-white mt-1">Negosiasi Bisnis Startup &amp; Farmasi</h4>
+            <p class="text-xs text-slate-500 mt-1">High-Context vs Direct Talk</p>
+          </button>
+          <button onclick="loadScenario(3)" id="scenBtn3" class="humanist-card text-left p-4 hover:border-goldWisdom">
+            <span class="text-[10px] font-bold text-amber-600 uppercase">Skenario 03</span>
+            <h4 class="font-bold text-sm text-slate-900 dark:text-white mt-1">Jamuan Jamuan Diplomasi Kuliner</h4>
+            <p class="text-xs text-slate-500 mt-1">Etiket Halal &amp; Vegetarian</p>
+          </button>
+        </div>
+      </div>
+
+      <!-- Active Scenario Play Area -->
+      <div class="humanist-card space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
+          <div>
+            <span id="scenCategory" class="text-xs font-bold text-saffron uppercase">Konteks Diplomasi Formal</span>
+            <h3 id="scenTitle" class="text-xl sm:text-2xl font-serif font-bold text-slate-900 dark:text-white mt-1">
+              Menegosiasikan MoU Beasiswa Pertukaran Mahasiswa India-Indonesia
+            </h3>
+          </div>
+          
+          <!-- Cultural Intelligence (CQ) Meter -->
+          <div class="w-full sm:w-56 space-y-1">
+            <div class="flex justify-between text-xs font-semibold">
+              <span class="text-slate-500">Skor CQ Anda:</span>
+              <span id="cqScoreVal" class="text-saffron font-bold">75 / 100</span>
+            </div>
+            <div class="w-full bg-slate-200 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden">
+              <div id="cqBar" class="bg-saffron h-full transition-all duration-500" style="width: 75%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Narrative Context -->
+        <div class="p-4 rounded-2xl bg-amber-50/50 dark:bg-slate-800/80 border border-amber-200/60 dark:border-slate-700 space-y-2">
+          <p id="scenNarrative" class="text-sm text-slate-800 dark:text-slate-200 leading-relaxed">
+            Anda mendampingi delegasi dalam ruang perundingan. Pihak mitra dari Indonesia tersenyum dan mengangguk berulang kali saat Anda memaparkan usulan program. Rekan Anda mengira mereka sudah setuju 100%. Padahal, dalam kesantunan komunikasi Indonesia (high-context), anggukan sering kali bermakna <em>"Saya mendengarkan Anda dengan hormat"</em>, bukan berarti sepakat terhadap butir pasal.
+          </p>
+          <div class="text-xs font-semibold text-slate-500 italic">
+            Tantangan Penerjemah/Diplomat: Bagaimana Anda menyampaikan klarifikasi kepada delegasi Anda tanpa menyinggung perasaan tuan rumah?
+          </div>
+        </div>
+
+        <!-- Decision Options -->
+        <div class="space-y-3" id="scenOptionsContainer">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Interpreter's Professional Insight Box -->
+        <div id="interpreterNoteBox" class="p-5 rounded-2xl bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-slate-800 dark:to-slate-900 border border-teal-200 dark:border-slate-700 space-y-2">
+          <div class="flex items-center gap-2 text-tealNusantara dark:text-teal-300 font-serif font-bold text-sm">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            Catatan Penerjemah Simultan (Mas Farhan):
+          </div>
+          <p id="interpreterNoteText" class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+            Pilihlah tindakan respons di atas untuk membaca analisis kesantunan linguistik dan strategi diplomasi antarbudaya.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ======================================================= -->
+    <!-- SECTION 4: POJOK BUDAYA & SASTRA (CULTURAL CORNER)     -->
+    <!-- ======================================================= -->
+    <div id="tab-budaya" class="tab-content space-y-12">
+      <div class="space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-950 text-orange-800 dark:text-orange-200 text-xs font-bold">
+          Khazanah Dua Peradaban
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-slate-900 dark:text-white">
+          Pojok Seni, Sastra, &amp; Resonansi Banyuwangi
+        </h2>
+        <p class="text-slate-600 dark:text-slate-400 max-w-3xl">
+          Menampilkan kekayaan tradisi yang Mas Farhan cintai dan hayati secara langsung—mulai dari tetabuhan magis Gamelan Osing di Sanggar Banyuwangi hingga perjumpaan sastra antara Rabindranath Tagore dan Pramoedya Ananta Toer.
+        </p>
+      </div>
+
+      <!-- Feature 1: Gamelan Banyuwangi Virtual Synthesizer -->
+      <div class="humanist-card space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
+          <div>
+            <span class="text-xs font-bold text-saffron uppercase tracking-wider">Interaktif Virtual Instrument</span>
+            <h3 class="text-2xl font-serif font-bold text-slate-900 dark:text-white mt-1">
+              Gamelan Osing Banyuwangi (Laras Slendro & Pelog)
+            </h3>
+            <p class="text-xs text-slate-500 mt-1">
+              Disintesis secara langsung menggunakan Web Audio API murni. Klik atau sentuh bilah perunggu untuk mendengar getaran resonansi.
+            </p>
+          </div>
+
+          <div class="text-xs px-3 py-1.5 rounded-xl bg-amber-50 dark:bg-slate-800 border border-amber-200 dark:border-slate-700 text-amber-800 dark:text-amber-200 font-semibold flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emeraldAmong animate-ping"></span>
+            Mode Interaktif Audio Aktif
+          </div>
+        </div>
+
+        <!-- The 5 Gamelan Keys -->
+        <div class="grid grid-cols-5 gap-3 sm:gap-6 py-4 max-w-2xl mx-auto">
+          <div class="gamelan-key" onclick="playGamelanTone(261.63, 'Ji (1)')">
+            <span class="text-xs block text-amber-900 font-mono">1</span>
+            <span class="text-lg sm:text-2xl font-bold font-serif">Ji</span>
+            <span class="text-[10px] block text-amber-800 font-normal">Panunggul</span>
+          </div>
+          <div class="gamelan-key" onclick="playGamelanTone(293.66, 'Ro (2)')">
+            <span class="text-xs block text-amber-900 font-mono">2</span>
+            <span class="text-lg sm:text-2xl font-bold font-serif">Ro</span>
+            <span class="text-[10px] block text-amber-800 font-normal">Gulu</span>
+          </div>
+          <div class="gamelan-key" onclick="playGamelanTone(329.63, 'Lu (3)')">
+            <span class="text-xs block text-amber-900 font-mono">3</span>
+            <span class="text-lg sm:text-2xl font-bold font-serif">Lu</span>
+            <span class="text-[10px] block text-amber-800 font-normal">Dhadha</span>
+          </div>
+          <div class="gamelan-key" onclick="playGamelanTone(392.00, 'Ma (5)')">
+            <span class="text-xs block text-amber-900 font-mono">5</span>
+            <span class="text-lg sm:text-2xl font-bold font-serif">Ma</span>
+            <span class="text-[10px] block text-amber-800 font-normal">Lima</span>
+          </div>
+          <div class="gamelan-key" onclick="playGamelanTone(440.00, 'Nem (6)')">
+            <span class="text-xs block text-amber-900 font-mono">6</span>
+            <span class="text-lg sm:text-2xl font-bold font-serif">Nem</span>
+            <span class="text-[10px] block text-amber-800 font-normal">Nem</span>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-xs text-slate-700 dark:text-slate-300 leading-relaxed flex items-start gap-3">
+          <span class="text-lg">🌿</span>
+          <div>
+            <strong>Catatan Pengalaman Mas Farhan di Sanggar Banyuwangi:</strong> 
+            <em>"Bermain gamelan mengajarkan saya esensi 'ngemong'. Di dalam gamelan tidak ada instrumen yang ingin menonjol sendiri; harmoni tercipta karena tiap penabuh saling mendengarkan jeda tabuhan sesamanya. Demikian pulalah hakikat komunikasi bahasa yang sejati."</em>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 2: Bilingual Literature Comparison (Tagore & Pramoedya) -->
+      <div class="space-y-6">
+        <div class="text-center max-w-2xl mx-auto space-y-2">
+          <span class="text-xs uppercase font-bold tracking-widest text-tealNusantara">Arsip Terjemahan Bilateral</span>
+          <h3 class="text-2xl sm:text-3xl font-serif font-bold text-slate-900 dark:text-white">
+            Perjumpaan Batin: Tagore &amp; Pramoedya
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+            Karya sastra abadi yang menunjukkan kedekatan nilai kemanusiaan, pembebasan martabat manusia, dan cinta kasih semesta.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- Card 1: Rabindranath Tagore (Gitanjali) -->
+          <div class="humanist-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+              <span class="text-xs font-bold text-saffron uppercase">Rabindranath Tagore &bull; Gitanjali (Lagu Persembahan)</span>
+              <button onclick="readPoemAloud('tagore')" class="text-xs font-semibold text-saffron flex items-center gap-1 hover:underline">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
+                Dengarkan Deklamasi
+              </button>
+            </div>
+
+            <div class="space-y-3">
+              <div class="p-3 rounded-xl bg-orange-50/40 dark:bg-slate-800 border border-orange-100 dark:border-slate-700">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-saffron block mb-1">Terjemahan Bahasa Indonesia (Oleh Mas Farhan):</span>
+                <p class="text-sm font-serif italic text-slate-900 dark:text-white leading-relaxed">
+                  "Di mana pikiran tiada gentar dan kepala tegak menengadah;<br>
+                  Di mana pengetahuan bebas tanpa sekat pembatas;<br>
+                  Di mana dunia belum dipecah belah oleh dinding-dinding sempit prasangka;<br>
+                  Ke dalam surga kebebasan itulah, wahai Bapa Semesta, bangkitkanlah jiwaku."
+                </p>
+              </div>
+
+              <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Teks Asli (English / Bengali Context):</span>
+                <p class="text-xs text-slate-600 dark:text-slate-400 italic">
+                  "Where the mind is without fear and the head is held high;<br>
+                  Where knowledge is free;<br>
+                  Where the world has not been broken up into fragments by narrow domestic walls..."
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Pramoedya Ananta Toer (Bumi Manusia) -->
+          <div class="humanist-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+              <span class="text-xs font-bold text-tealNusantara uppercase">Pramoedya Ananta Toer &bull; Tetralogi Buru</span>
+              <button onclick="readPoemAloud('pramoedya')" class="text-xs font-semibold text-tealNusantara flex items-center gap-1 hover:underline">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
+                Dengarkan Deklamasi
+              </button>
+            </div>
+
+            <div class="space-y-3">
+              <div class="p-3 rounded-xl bg-teal-50/40 dark:bg-slate-800 border border-teal-100 dark:border-slate-700">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-tealNusantara block mb-1">Teks Asli Bahasa Indonesia:</span>
+                <p class="text-sm font-serif italic text-slate-900 dark:text-white leading-relaxed">
+                  "Seorang terpelajar harus sudah berbuat adil sejak dalam pikiran, apalagi dalam perbuatan."<br>
+                  "Kalian boleh maju dalam pelajaran, mungkin mencapai deretan gelar, tapi tanpa mencintai sastra, kalian tinggal hanya hewan yang pandai."
+                </p>
+              </div>
+
+              <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Terjemahan Hindi &amp; Inggris (Oleh Mas Farhan):</span>
+                <p class="text-xs text-slate-600 dark:text-slate-400 italic">
+                  "एक शिक्षित व्यक्ति को अपने विचारों में भी न्यायप्रिय होना चाहिए, कर्मों में तो और भी अधिक।"<br>
+                  "A truly educated person must be just from the very dawn of thought, let alone in deed."
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================= -->
+    <!-- SECTION 5: REPOSITORI RISET & PENDIDIK (EDUCATOR'S HUB) -->
+    <!-- ======================================================= -->
+    <div id="tab-riset" class="tab-content space-y-12">
+      <div class="space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-200 text-xs font-bold">
+          Luaran Produk Disertasi Doktoral (R&amp;D)
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-slate-900 dark:text-white">
+          Pusat Riset &amp; Perangkat Guru / Dosen BIPA
+        </h2>
+        <p class="text-slate-600 dark:text-slate-400 max-w-3xl">
+          Sebagai luaran penelitian dan pengembangan (Research & Development), platform ini menyediakan diagram alur metodologi 5-tahap, modul ajar (RPP) yang dapat diunduh, serta rubrik evaluasi afektif untuk diadopsi oleh pendidik di seluruh dunia.
+        </p>
+      </div>
+
+      <!-- Diagram Alur 5-Tahap R&D -->
+      <div class="humanist-card space-y-6">
+        <div class="border-b border-slate-100 dark:border-slate-800 pb-3">
+          <span class="text-xs font-bold text-saffron uppercase tracking-wider">Metodologi Penelitian &amp; Pengembangan</span>
+          <h3 class="text-2xl font-serif font-bold text-slate-900 dark:text-white mt-1">
+            Diagram 5-Tahap Pengembangan Model Bahasa Humanis-Digital
+          </h3>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 pt-2">
+          
+          <div class="rd-step active">
+            <span class="text-[10px] font-bold text-saffron uppercase">Tahap 1</span>
+            <h4 class="font-bold text-sm text-slate-900 dark:text-white mt-1">Analisis Kebutuhan</h4>
+            <p class="text-xs text-slate-500 mt-1">
+              Pemetaan fenomena toksisitas siber dan kesenjangan afektif dalam kurikulum BIPA konvensional.
+            </p>
+          </div>
+
+          <div class="rd-step active">
+            <span class="text-[10px] font-bold text-tealNusantara uppercase">Tahap 2</span>
+            <h4 class="font-bold text-sm text-slate-900 dark:text-white mt-1">Desain Pedagogis</h4>
+            <p class="text-xs text-slate-500 mt-1">
+              Sintesis teoretis nilai Ahimsa &amp; Sistem Among ke dalam kerangka Taksonomi Tri-N.
+            </p>
+          </div>
+
+          <div class="rd-step active">
+            <span class="text-[10px] font-bold text-amber-600 uppercase">Tahap 3</span>
+            <h4 class="font-bold text-sm text-slate-900 dark:text-white mt-1">Pengembangan Prototipe</h4>
+            <p class="text-xs text-slate-500 mt-1">
+              Pembangunan platform interaktif, simulasi kecerdasan budaya, dan Web Audio gamelan.
+            </p>
+          </div>
+
+          <div class="rd-step">
+            <span class="text-[10px] font-bold text-slate-400 uppercase">Tahap 4</span>
+            <h4 class="font-bold text-sm text-slate-900 dark:text-white mt-1">Uji Coba Lapangan</h4>
+            <p class="text-xs text-slate-500 mt-1">
+              Uji coba pada kelas pembelajar BIPA di India dan Indonesia untuk menguji kegunaan.
+            </p>
+          </div>
+
+          <div class="rd-step">
+            <span class="text-[10px] font-bold text-slate-400 uppercase">Tahap 5</span>
+            <h4 class="font-bold text-sm text-slate-900 dark:text-white mt-1">Diseminasi &amp; HKI</h4>
+            <p class="text-xs text-slate-500 mt-1">
+              Publikasi jurnal bereputasi Scopus, pendaftaran hak cipta modul, dan adopsi luas.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Downloadable Lesson Plan (RPP) & Rubric Preview -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
+        <!-- Modul Ajar Card -->
+        <div class="humanist-card space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+            <span class="text-xs font-bold text-tealNusantara uppercase">Perangkat Pembelajaran Terbuka</span>
+            <span class="text-xs px-2 py-0.5 rounded bg-teal-100 dark:bg-teal-900 text-teal-800 dark:text-teal-200 font-semibold">Siap Diadopsi</span>
+          </div>
+          
+          <h3 class="text-xl font-serif font-bold text-slate-900 dark:text-white">
+            Modul Ajar BIPA: "Komunikasi Santun &amp; Diplomasi Budaya"
+          </h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            Panduan 4 pertemuan terstruktur untuk pengajar bahasa Indonesia di universitas luar negeri, mengintegrasikan telaah sastra, latihan empati media sosial, dan penulisan kolaboratif.
+          </p>
+
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-2 text-xs">
+            <div class="flex justify-between">
+              <span class="text-slate-500">Target Audiens:</span>
+              <span class="font-semibold text-slate-800 dark:text-slate-200">Mahasiswa BIPA Tingkat Menengah-Mahir</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-500">Pendekatan:</span>
+              <span class="font-semibold text-slate-800 dark:text-slate-200">Pedagogi Kritis &amp; Sistem Among Tri-N</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-500">Alokasi Waktu:</span>
+              <span class="font-semibold text-slate-800 dark:text-slate-200">4 Pertemuan &times; 100 Menit</span>
+            </div>
+          </div>
+
+          <button onclick="previewLessonPlanModal()" class="btn-primary w-full justify-center text-xs py-2.5">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+            Buka &amp; Unduh RPP Lengkap (Cetak)
+          </button>
+        </div>
+
+        <!-- Rubrik Asesmen Afektif -->
+        <div class="humanist-card space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+            <span class="text-xs font-bold text-saffron uppercase">Instrumen Penilaian Autentik</span>
+            <span class="text-xs px-2 py-0.5 rounded bg-orange-100 dark:bg-orange-900 text-saffron font-semibold">Tri-N Rubric</span>
+          </div>
+
+          <h3 class="text-xl font-serif font-bold text-slate-900 dark:text-white">
+            Matriks Penilaian Sikap Bahasa Humanis
+          </h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            Menilai bukan hanya ketepatan gramatikal, melainkan etika berbahasa, kesantunan pragmatik, dan kemampuan de-eskalasi konflik verbal.
+          </p>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="border-b border-slate-200 dark:border-slate-700 text-slate-500">
+                  <th class="py-2 font-bold">Dimensi</th>
+                  <th class="py-2 font-bold">Indikator Perilaku</th>
+                  <th class="py-2 font-bold text-right">Bobot</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
+                <tr>
+                  <td class="py-2 font-semibold text-saffron">Ngerti</td>
+                  <td class="py-2">Pemahaman wawasan silang budaya &amp; kosakata kemanusiaan</td>
+                  <td class="py-2 text-right font-mono font-bold">30%</td>
+                </tr>
+                <tr>
+                  <td class="py-2 font-semibold text-emeraldAmong">Ngroso</td>
+                  <td class="py-2">Tenggang rasa, pengendalian agresi, penerapan Digital Ahimsa</td>
+                  <td class="py-2 text-right font-mono font-bold">40%</td>
+                </tr>
+                <tr>
+                  <td class="py-2 font-semibold text-tealNusantara">Ngelakoni</td>
+                  <td class="py-2">Kolaborasi aktif, dialog inklusif, dan aksi persahabatan nyata</td>
+                  <td class="py-2 text-right font-mono font-bold">30%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="text-[11px] text-slate-500 italic pt-2">
+            * Rubrik ini dirancang khusus untuk memvalidasi luaran afektif riset disertasi doktoral.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ======================================================= -->
+    <!-- SECTION 6: PROFIL PENGEMBANG & VISI (TENTANG MAS FARHAN)-->
+    <!-- ======================================================= -->
+    <div id="tab-tentang" class="tab-content space-y-12">
+      
+      <!-- Developer Bio Banner -->
+      <div class="humanist-card p-8 sm:p-12 space-y-8 bg-gradient-to-br from-white via-amber-50/20 to-orange-50/30 dark:from-slate-900 dark:to-slate-800">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+          
+          <!-- Avatar & Status Badge -->
+          <div class="text-center space-y-4">
+            <div class="relative inline-block">
+              <div class="w-36 h-36 rounded-full bg-gradient-to-tr from-saffron via-goldWisdom to-tealNusantara p-1.5 shadow-xl mx-auto">
+                <div class="w-full h-full rounded-full bg-white dark:bg-slate-900 flex items-center justify-center text-5xl">
+                  👨‍🎓
+                </div>
+              </div>
+              <span class="absolute bottom-1 right-3 px-2 py-0.5 rounded-full bg-emeraldAmong text-white text-[10px] font-bold shadow-md">
+                Ph.D Candidate
+              </span>
+            </div>
+
+            <div>
+              <h3 class="text-2xl font-serif font-bold text-slate-900 dark:text-white">
+                Mas Farhan
+              </h3>
+              <p class="text-xs text-saffron font-bold uppercase tracking-wider mt-0.5">
+                Akademisi, Peneliti, &amp; Penerjemah Simultan
+              </p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                Kandidat Doktor (S3) Ilmu Pendidikan Bahasa
+              </p>
+            </div>
+          </div>
+
+          <!-- Academic Journey Narrative (2 Cols) -->
+          <div class="lg:col-span-2 space-y-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-950 text-saffron text-xs font-bold">
+              Kisah Inspiratif Antardisiplin Ilmu
+            </div>
+
+            <h4 class="text-xl sm:text-2xl font-serif font-bold text-slate-900 dark:text-white">
+              Menjembatani Dunia Komputasi dan Kemanusiaan Bahasa
+            </h4>
+
+            <div class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed space-y-3">
+              <p>
+                Lahir dengan latar belakang akademis <strong>S1 Teknik Komputer (Computer Science)</strong>, Mas Farhan memiliki pemahaman logis-algoritmik yang kuat terhadap arsitektur digital. Namun, kecintaannya yang mendalam pada kemanusiaan membawanya melangkah jauh menyeberangi samudra ke Indonesia hingga mencatatkan rekor bersejarah: <strong>akademisi asal India pertama yang meraih gelar Magister (S2) Pendidikan Bahasa Indonesia</strong>.
+              </p>
+              <p>
+                Kini, sebagai <strong>Kandidat Doktor (S3) Ilmu Pendidikan Bahasa</strong>, beliau menyinergikan kedua dunia tersebut. Beliau membuktikan bahwa teknologi informasi tidak boleh menciptakan dehumanisasi, melainkan harus menjadi katalis yang menghidupkan kembali empati, kesantunan, dan kehangatan relasi antarumat manusia.
+              </p>
+              <p>
+                Sebagai <strong>Simultaneous Interpreter (Penerjemah Simultan VIP)</strong> dalam berbagai forum bilateral tingkat tinggi Indonesia-India, serta penikmat seni tradisi Gamelan di Sanggar Tari Banyuwangi, Mas Farhan menghayati betul denyut kebudayaan kedua negeri.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Vision Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-slate-200 dark:border-slate-700">
+          
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-3">
+            <div class="w-10 h-10 rounded-xl bg-orange-100 dark:bg-orange-950/80 text-saffron flex items-center justify-center font-bold text-lg">
+              🏛️
+            </div>
+            <h5 class="text-lg font-serif font-bold text-slate-900 dark:text-white">
+              Visi: Pusat Studi Bahasa &amp; Budaya Indonesia di India
+            </h5>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              Mendirikan <em>Indonesian Cultural & Language Study Center</em> terkemuka di India untuk memfasilitasi diplomasi kebudayaan, penerjemahan karya sastra Indonesia ke dalam bahasa-bahasa di India, serta riset bersama antaruniversitas.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-3">
+            <div class="w-10 h-10 rounded-xl bg-teal-100 dark:bg-teal-950/80 text-tealNusantara flex items-center justify-center font-bold text-lg">
+              🕊️
+            </div>
+            <h5 class="text-lg font-serif font-bold text-slate-900 dark:text-white">
+              Misi: Menghidupkan Kembali Semangat Bandung 1955 &amp; Shantiniketan
+            </h5>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              Mengukuhkan kembali ikatan emosional kedua bangsa besar di Asia Selatan dan Asia Tenggara melalui pendidikan bahasa yang santun, merdeka, dan bermartabat tinggi.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Collaboration Dialog Box -->
+        <div class="p-6 rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 dark:from-slate-800 dark:to-slate-900 border border-amber-200 dark:border-slate-700 space-y-4">
+          <div class="flex items-center justify-between">
+            <h5 class="text-base font-serif font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <span>🤝</span> Kolaborasi Riset &amp; Pengujian Produk
+            </h5>
+            <span class="text-xs text-saffron font-bold">Terbuka untuk Mitra Akademisi &amp; Diplomat</span>
+          </div>
+
+          <p class="text-xs text-slate-600 dark:text-slate-400">
+            Apakah Anda pendidik BIPA, peneliti linguistik, atau pengambil kebijakan kebudayaan? Mari diskusikan implementasi model ini di institusi Anda.
+          </p>
+
+          <form onsubmit="handleContactSubmit(event)" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <input type="text" id="contactName" required placeholder="Nama & Gelar Anda" class="p-3 text-xs rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-saffron">
+            <input type="email" id="contactEmail" required placeholder="Email Institusi" class="p-3 text-xs rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-saffron">
+            <button type="submit" class="btn-primary text-xs justify-center py-3">
+              Kirim Pesan Kolaborasi
+            </button>
+          </form>
+          <div id="contactSuccessMsg" class="hidden text-xs text-emerald-600 font-semibold text-center"></div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ================= MODAL: RPP PREVIEW (PRINTABLE) ================= -->
+  <div id="lessonPlanModal" class="fixed inset-0 z-50 hidden bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 space-y-6 border border-slate-200 dark:border-slate-800 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+        <div>
+          <span class="text-xs font-bold text-tealNusantara uppercase">Rencana Pelaksanaan Pembelajaran (RPP) BIPA</span>
+          <h3 class="text-xl font-serif font-bold text-slate-900 dark:text-white mt-1">
+            Model Pembelajaran Bahasa Humanis-Digital (Sistem Tri-N)
+          </h3>
+        </div>
+        <button onclick="closeLessonPlanModal()" class="text-slate-400 hover:text-slate-600 text-2xl font-bold">&times;</button>
+      </div>
+
+      <div class="space-y-4 text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-sans">
+        <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 space-y-1">
+          <p><strong>Institusi:</strong> Universitas Mitra / Pusat Kebudayaan Indonesia di Luar Negeri</p>
+          <p><strong>Mata Kuliah:</strong> Kemahiran Berbahasa Indonesia Tingkat BIPA 4-5 (Tingkat Madya-Mahir)</p>
+          <p><strong>Fokus Keterampilan:</strong> Menulis &amp; Berbicara Lintas Budaya (Digital Ahimsa &amp; Sistem Among)</p>
+        </div>
+
+        <h4 class="font-bold font-serif text-sm text-slate-900 dark:text-white">I. Capaian Pembelajaran (Learning Outcomes)</h4>
+        <ul class="list-disc pl-5 space-y-1">
+          <li><strong>Dimensi Kognitif (Ngerti):</strong> Pembelajar mampu menganalisis nilai kemanusiaan, sejarah bilateral India-Indonesia, serta variasi register kesantunan bahasa.</li>
+          <li><strong>Dimensi Afektif (Ngroso):</strong> Pembelajar menunjukkan sikap tenggang rasa (tepasira), merespons ujaran provokatif dengan bahasa santun tanpa kekerasan (Digital Ahimsa).</li>
+          <li><strong>Dimensi Psikomotorik (Ngelakoni):</strong> Pembelajar mampu menyusun tulisan reflektif kolaboratif dan berpartisipasi dalam simulasi diplomasi kebudayaan.</li>
+        </ul>
+
+        <h4 class="font-bold font-serif text-sm text-slate-900 dark:text-white">II. Sintaks Pembelajaran Tri-N (100 Menit)</h4>
+        <ol class="list-decimal pl-5 space-y-2">
+          <li><strong>Pendahuluan (15 Menit):</strong> Apersepsi melalui pembacaan kutipan puisi Tagore / Pramoedya dan pengantar filosofi Asah-Asih-Asuh oleh pendidik (*Ing Ngarso Sung Tulodo*).</li>
+          <li><strong>Fase Ngerti (25 Menit):</strong> Bedah teks sastra sejarah dan eksplorasi glosarium kosakata kemanusiaan di platform digital.</li>
+          <li><strong>Fase Ngroso (25 Menit):</strong> Praktik simulasi studi kasus Digital Ahimsa; mahasiswa berdiskusi merumuskan respons restoratif atas komentar provokatif di ruang siber (*Ing Madyo Mangun Karso*).</li>
+          <li><strong>Fase Ngelakoni (25 Menit):</strong> Penulisan esai persahabatan bilateral secara kolaboratif dalam platform digital.</li>
+          <li><strong>Penutup & Refleksi (10 Menit):</strong> Umpan balik formatif dan dorongan kemandirian belajar (*Tut Wuri Handayani*).</li>
+        </ol>
+      </div>
+
+      <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+        <button onclick="window.print()" class="btn-secondary text-xs py-2 px-4">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
+          Cetak Dokumen
+        </button>
+        <button onclick="closeLessonPlanModal()" class="btn-primary text-xs py-2 px-4">
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="mt-24 border-t border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+      <div class="flex items-center justify-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-saffron"></span>
+        <span class="font-serif font-bold text-slate-800 dark:text-slate-200 text-lg">
+          Platform Pembelajaran Bahasa Humanis-Digital
+        </span>
+        <span class="w-2 h-2 rounded-full bg-tealNusantara"></span>
+      </div>
+      <p class="text-xs text-slate-500 dark:text-slate-400 max-w-xl mx-auto">
+        Prototipe Luaran Penelitian dan Pengembangan (R&amp;D) Disertasi Doktoral &bull; Dirancang &amp; Dikembangkan oleh <strong>Mas Farhan</strong> (Kandidat Doktor S3 Pendidikan Bahasa &amp; Sarjana Teknik Komputer).
+      </p>
+      <div class="text-[11px] text-slate-400">
+        &copy; 2026 Model Pembelajaran Bahasa Humanis-Digital. Sinergi Mahatma Gandhi &amp; Ki Hadjar Dewantara.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Core JavaScript Engine -->
+  <script src="app.js"></script>
+</body>
+</html>
+
